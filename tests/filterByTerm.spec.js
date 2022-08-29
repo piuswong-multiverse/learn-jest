@@ -39,4 +39,10 @@ describe("Filter function", () => {
         expect(filterByTerm(input,'.COM')).toEqual(output);
     });
 
+    test("Filter by empty search term", () => {
+        const output = "Cannot search for empty string.";
+        expect(filterByTerm(input,null)).toBe(output);
+        expect(filterByTerm(input,"")).toBe(output);
+        expect(filterByTerm(input,undefined)).toBe(output);
+    });
 });

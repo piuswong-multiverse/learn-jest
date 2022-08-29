@@ -2,7 +2,7 @@
 // Filename here is a convention from Ruby.
 // Define inputs and outputs; define test using 'expect' and a Jest matcher
 
-const filterByTerm = require('../index');
+const filterByTerm = require('../src/index');
 
 // contains one ore more related tests
 describe("Filter function", () => {
@@ -39,10 +39,19 @@ describe("Filter function", () => {
         expect(filterByTerm(input,'.COM')).toEqual(output);
     });
 
-    test("Filter by empty search term", () => {
-        const output = "Cannot search for empty string.";
-        expect(filterByTerm(input,null)).toBe(output);
-        expect(filterByTerm(input,"")).toBe(output);
-        expect(filterByTerm(input,undefined)).toBe(output);
+    // Negative test (expected to throw error)
+    // When expecting a thrown error, must wrap input in function so the error is collected
+    // https://jestjs.io/docs/expect#tothrowerror
+    test("Give error when filtering by empty search term", () => {
+        let message = "Cannot search for empty string.";
+        expect( () => {
+            filterByTerm(input,null);
+        }).toThrow(message);
+        expect( () => {
+            filterByTerm(input,"");
+        }).toThrow(message);
+        expect( () => {
+            filterByTerm(input,undefined);
+        }).toThrow(message);
     });
 });

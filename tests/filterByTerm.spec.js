@@ -22,6 +22,8 @@ describe("Filter function", () => {
         ];
         // define the test
         expect(filterByTerm(input, 'dev')).toEqual(output);
+        expect(filterByTerm(input, "DEV")).toEqual(output);
     });
+
 
 });
